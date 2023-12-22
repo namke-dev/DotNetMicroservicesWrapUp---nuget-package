@@ -1,3 +1,4 @@
+using System;
 using System.Reflection;
 using MassTransit;
 using Microsoft.Extensions.Configuration;
@@ -22,6 +23,10 @@ namespace Play.Common.MassTransit
 
                     rabbitMqConfigurator.Host(rabbitMqSettings.Host);
                     rabbitMqConfigurator.ConfigureEndpoints(context, new KebabCaseEndpointNameFormatter(serviceSettings.ServiceName, false));
+                    rabbitMqConfigurator.UseMessageRetry(retryConfigurator =>
+                    {
+                        retryConfigurator.Interval(3, TimeSpan.FromSeconds(3));
+                    });
                 });
             });
             return services;
