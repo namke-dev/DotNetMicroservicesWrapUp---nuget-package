@@ -14,6 +14,6 @@ dotnet add package MassTransit.RabbitMQ
 
 Packing
 ```powershell
-dotnet pack -o <Dir to store source>
+dotnet pack -p:PackageVersion=1.0.1 -o ..\..\..\packages\
 dotnet nuget add source <Dir to stored source>
 ```
